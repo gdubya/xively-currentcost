@@ -11,7 +11,7 @@ import datetime
 import os
 import yaml
 
-CONFIG_DIR="/etc/xively-currentcost"
+CONFIG_DIR="/opt/xively-currentcost"
 
 API_KEY=''
 FEED_ID=''
@@ -92,12 +92,12 @@ def run(sr, handler):
     logger.exception("Exception caught")
   finally:
     logger.info("exiting")
-    sr.close()
+#    sr.close()
 
 def main():
   # Setup the serial port
-  sr=serial.Serial('/dev/ttyAMA0', 57600)
-  sr.open()
+  sr=serial.Serial('/dev/ttyUSB0', 9600, timeout=45)
+#  sr.open()
   # Setup the Xively feed and streams
   api = xively.XivelyAPIClient(API_KEY)
   feed = api.feeds.get(FEED_ID)
